@@ -1,0 +1,67 @@
+package audit;
+
+public interface Audit {
+
+    abstract double taxChecker(double income);
+
+    abstract double taxPaid(double tax);
+
+    abstract double homeExpenditure(double expenditure);
+
+    abstract double healthExpenditure(double expenditure);
+
+    abstract double vehicleExpenditure(double expenditure);
+
+    abstract double personalFamilyExpenditure(double expenditure);
+
+    abstract double miscellaneousExpenditure(double expenditure);
+}
+
+public class AuditImpl implements Audit {
+
+    @Override
+    public double taxChecker(double income) {
+        return income * 0.1;
+    }
+
+    @Override
+    public double taxPaid(double tax) {
+        return tax;
+    }
+
+    @Override
+    public double homeExpenditure(double expenditure) {
+        return expenditure;
+    }
+
+    @Override
+    public double healthExpenditure(double expenditure) {
+        return expenditure;
+    }
+
+    @Override
+    public double vehicleExpenditure(double expenditure) {
+        return expenditure;
+    }
+
+    @Override
+    public double personalFamilyExpenditure(double expenditure) {
+        return expenditure;
+    }
+
+    @Override
+    public double miscellaneousExpenditure(double expenditure) {
+        return expenditure;
+    }
+
+    public void audit(double totalIncome, double taxPaid, double homeExpenditure, double healthExpenditure, double vehicleExpenditure, double personalFamilyExpenditure, double miscellaneousExpenditure) throws Exception {
+        double totalExpenditure = homeExpenditure + healthExpenditure + vehicleExpenditure + personalFamilyExpenditure + miscellaneousExpenditure;
+        double expectedTax = taxChecker(totalIncome);
+        if (expectedTax != taxPaid) {
+            throw new Exception("Fraud detected! Expected tax: " + expectedTax + ", Paid tax: " + taxPaid);
+        } else {
+            System.out.println("Audit successful!");
+        }
+    }
+}
+
